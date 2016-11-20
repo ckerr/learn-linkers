@@ -1,0 +1,9 @@
+cflags = -Wall
+
+rule link
+  command = g++ $cflags -c $in -o $out
+
+rule build
+  command = g++ -c $cflags -c $in -o $out
+
+build build/main: link build/main.o
