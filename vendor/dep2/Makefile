@@ -1,8 +1,8 @@
-.phony: all
+.phony: all clean
 
 all: build/libdep2.a
 
-build:
+build: 
 	mkdir -p build
 
 build/libdep2.a: build build/dep2.o
