@@ -14,7 +14,7 @@ build/dep1.o: dep1.cc
 build/dep1.pic.o:
 	g++ -I vendor/dep2 -fPIC -c -o build/dep1.pic.o dep1.cc
 
-build/libdep1.so: build/dep1.pic.o vendor/dep2/build/libdep2.so
+build/libdep1.so: build build/dep1.pic.o vendor/dep2/build/libdep2.so
 	g++ -shared -L vendor/dep2/build -l dep2 -o build/libdep1.so build/dep1.pic.o
 
 vendor/dep2/build/libdep2.so:
