@@ -1,9 +1,18 @@
-cflags = -Wall
-
 rule link
-  command = g++ $cflags -c $in -o $out
+  command = ninja -t msvc -e environment.x64 -- "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\link.exe" $in /out:${out}
 
-rule build
-  command = g++ -c $cflags -c $in -o $out
+rule cc
+  deps = msvc
+  command = ninja -t msvc -e environment.x64 -- "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\cl.exe" /EHsc /c $in /I vendor\dep1 /I vendor\dep2 /Fo${out} /showIncludes
 
-build build/main: link build/main.o
+build vendor/dep1/build/dep1.o: cc vendor/dep1/dep1.cc
+build vendor/dep2/build/dep2.o: cc vendor/dep2/dep2.cc
+
+build build/main.o: cc src/main.cc
+build build/caps.o: cc src/caps.cc
+
+build build/main.exe: link build/caps.o build/main.o vendor/dep1/build/dep1.o vendor/dep2/build/dep2.o
+
+build ALL: phony build/main.exe
+
+default ALL
