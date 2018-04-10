@@ -1,0 +1,13 @@
+.phony: all
+
+COMPILE=g++ -c
+LINK=g++
+
+all: build build/main
+	./build/main
+build:
+	mkdir -p build
+build/main: build/main.o
+	${LINK} -o build/main build/main.o
+build/main.o: src/main.cpp
+	${COMPILE} -o build/main.o src/main.cpp

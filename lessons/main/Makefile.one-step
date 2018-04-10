@@ -1,0 +1,8 @@
+.phony: all
+
+all: build/main
+	./build/main
+
+build/main:
+	mkdir -p build
+	g++ -o build/main src/main.cpp
