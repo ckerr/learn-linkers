@@ -1,0 +1,16 @@
+.phony: all clean
+
+COMPILE=g++ -c ${CFLAGS}
+LINK=g++ ${CFLAGS}
+
+all: build/main-objects
+	./build/main-objects
+
+build/main-objects: build build/main.o build/caps.o vendor/dep1/build/libdep1.a vendor/dep2/build/libdep2.a
+	${LINK} -o build/main-objects vendor/dep1/build/dep1.o vendor/dep2/build/dep2.o build/main.o build/caps.o
+build:
+	mkdir -p build
+build/main.o: src/main.cc src/caps.h vendor/dep1/dep1.h vendor/dep2/dep2.h
+	${COMPILE} -I vendor/dep2 -I vendor/dep1 -o build/main.o src/main.cc
+build/caps.o: src/caps.cc src/caps.h
+	${COMPILE} -o build/caps.o src/caps.cc

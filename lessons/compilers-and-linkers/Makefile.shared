@@ -1,0 +1,25 @@
+.phony: all clean
+
+COMPILE=g++ -c ${CFLAGS}
+LINK=g++ ${CFLAGS}
+
+all: build/main-shared
+	DYLD_LIBRARY_PATH=vendor/dep1/build:vendor/dep2/build ./build/main-shared
+
+build/main-shared: build build/main.o build/caps.o vendor/dep1/build/libdep1.so vendor/dep2/build/libdep2.so
+	${LINK} -o build/main-shared vendor/dep1/build/libdep1.so vendor/dep2/build/libdep2.so build/main.o build/caps.o
+
+build:
+	mkdir -p build
+
+build/main.o: src/main.cc src/caps.h vendor/dep1/dep1.h vendor/dep2/dep2.h
+	${COMPILE} -I vendor/dep2 -I vendor/dep1 -o build/main.o src/main.cc
+
+build/caps.o: src/caps.cc src/caps.h
+	${COMPILE} -o build/caps.o src/caps.cc
+
+vendor/dep2/build/libdep2.so:
+	${MAKE} -C vendor/dep2 build/libdep2.so
+
+vendor/dep1/build/libdep1.so:
+	${MAKE} -C vendor/dep1 build/libdep1.so
