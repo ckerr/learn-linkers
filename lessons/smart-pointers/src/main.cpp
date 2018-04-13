@@ -97,5 +97,15 @@ int main() {
         INFO("A(8) Should not be deleted");
     }
 
+    TEST(7)
+    {
+        SmartPointer spA = make(9);
+        SmartPointer spB;
+
+        spA = spB;
+
+        INFO("A(9) Should be deleted");
+    }
+
     return 0;
 }
