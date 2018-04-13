@@ -26,6 +26,7 @@ class SmartPointer {
 private:
     PointerBox* pb;
 public:
+    SmartPointer(): pb(nullptr) {}
     SmartPointer(A* a): pb(new PointerBox(a)) {}
     A* operator->();
     SmartPointer operator=(const SmartPointer& p);
@@ -83,6 +84,17 @@ int main() {
     TEST(5)
     {
         SmartPointer spA = make(7);
+    }
+
+    TEST(6)
+    {
+        SmartPointer spA;
+        SmartPointer spB;
+
+        spA = make(8);
+        spB = spA;
+
+        INFO("A(8) Should not be deleted");
     }
 
     return 0;
