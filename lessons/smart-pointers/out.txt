@@ -22,3 +22,11 @@ DATA: ~A(6)
 TEST: 5
 DATA: A(7)
 DATA: ~A(7)
+TEST: 6
+DATA: A(8)
+INFO: A(8) Should not be deleted
+DATA: ~A(8)
+TEST: 7
+DATA: A(9)
+DATA: ~A(9)
+INFO: A(9) Should be deleted
