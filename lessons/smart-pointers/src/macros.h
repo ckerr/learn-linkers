@@ -19,3 +19,4 @@ using std::endl;
 
 #define PRINT(Str) \
   cout << Str << endl;
+
