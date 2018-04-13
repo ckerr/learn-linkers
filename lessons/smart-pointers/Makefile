@@ -1,3 +1,4 @@
+SHELL:=/bin/bash
 .phony: all clean
 
 CFLAGS=-std=c++11
@@ -15,6 +16,9 @@ build:
 
 build/main.o: src/main.cpp
 	${COMPILE} -o build/main.o src/main.cpp
+
+test: build/main
+	diff <(./build/main) out.txt && echo SUCCESS || echo FAIL
 
 clean:
 	rm -rf build/*
