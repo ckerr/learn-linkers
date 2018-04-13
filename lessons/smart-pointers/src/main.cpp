@@ -26,7 +26,7 @@ class SmartPointer {
 private:
     PointerBox* pb;
 public:
-    SmartPointer(): pb(nullptr) {}
+    SmartPointer();
     SmartPointer(A* a): pb(new PointerBox(a)) {}
     A* operator->();
     SmartPointer operator=(const SmartPointer& p);
