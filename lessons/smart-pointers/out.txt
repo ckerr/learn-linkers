@@ -1,0 +1,24 @@
+TEST: 1
+DATA: A(1)
+INFO: 1
+DATA: ~A(1)
+TEST: 2
+DATA: A(2)
+DATA: ~A(2)
+TEST: 3
+DATA: A(3)
+INFO: 3
+DATA: ~A(3)
+TEST: 4
+DATA: A(4)
+DATA: A(5)
+DATA: ~A(4)
+INFO: A(4) Should be deleted
+DATA: ~A(5)
+TEST: 4
+DATA: A(6)
+INFO: A(6) Should not be deleted
+DATA: ~A(6)
+TEST: 5
+DATA: A(7)
+DATA: ~A(7)
